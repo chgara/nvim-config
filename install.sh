@@ -5,7 +5,7 @@ if [ "$EUID" -ne 0 ]; then
   exit
 fi
 
-pacman -Syu --noconfirm neovim xclip
+pacman -S --noconfirm neovim xclip
 
 CONFIG_DIR="$HOME/.config/nvim"
 BACKUP_DIR="$HOME/.config/nvim_backup"
