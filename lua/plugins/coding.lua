@@ -2,7 +2,7 @@
 return {
     {
         "williamboman/mason.nvim",
-        event = "BufReadPre",
+        event = {"BufReadPre", "BufNewFile"},
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "neovim/nvim-lspconfig",
@@ -134,7 +134,7 @@ return {
     },
     {
         "smjonas/inc-rename.nvim",
-        event = "BufReadPre",
+        event = {"BufReadPre", "BufNewFile"},
         config = function()
             require("inc_rename").setup({})
             vim.keymap.set("n", "rn", function()
@@ -150,7 +150,7 @@ return {
     -- },
     {
         'zbirenbaum/copilot.lua',
-        event = "BufReadPre",
+        event = {"BufReadPre", "BufNewFile"},
         config = function ()
             require("copilot").setup({
                 filetypes = {
@@ -164,7 +164,7 @@ return {
     },
     {
         "yetone/avante.nvim",
-        event = "BufReadPre",
+        event = {"BufReadPre", "BufNewFile"},
         build = "make",
         opts = {
             provider = "copilot",
