@@ -11,6 +11,10 @@ return {
         opts = {
             options = {
                 theme = "horizon",
+                disabled_filetypes = {
+                    statusline = { "Avante" },
+                    winbar = { "Avante" },
+                },
             },
             sections = {
                 lualine_c = { 'filename','lsp_progress' },

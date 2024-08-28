@@ -19,9 +19,27 @@ return {
             require("mason-lspconfig").setup_handlers {
                 function (server_name) -- default handler (optional)
                     require("lspconfig")[server_name].setup {
-                        capabilities = capabilities
+                        capabilities = capabilities,
+                        on_attach = function(client, bufnr)
+                            local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+                            buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { noremap=true, silent=true })
+                            buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { noremap=true, silent=true })
+                            buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap=true, silent=true })
+                        end
                     }
                 end,
+                ["csharp_ls"] = function ()
+                    require("lspconfig").tsserver.setup {
+                        capabilities = capabilities,
+                        on_attach = function(client, bufnr)
+                            local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+                            buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { noremap=true, silent=true })
+                            buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { noremap=true, silent=true })
+                            buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap=true, silent=true })
+                        end,
+                        settings = { rootMarkers = { "global.json", "Directory.Build.props", "*.sln", "*.csproj" } }
+                    }
+                end
             }
         end
     },
@@ -169,6 +187,14 @@ return {
         opts = {
             provider = "copilot",
             hints = { enabled = true },
+            windows = {
+                width = 25,
+                wrap = true,
+                sidebar_header = {
+                    align = "center",
+                    rounded = false,
+                },
+            }
         },
         dependencies = {
             "nvim-tree/nvim-web-devicons",
@@ -179,6 +205,7 @@ return {
             {
                 'MeanderingProgrammer/render-markdown.nvim',
                 opts = {
+                    enabled = true,
                     file_types = { "markdown", "Avante" },
                 },
                 ft = { "markdown", "Avante" },

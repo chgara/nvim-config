@@ -9,8 +9,8 @@ vim.cmd([[set number relativenumber]])
 vim.api.nvim_set_keymap('n', '<C-c>', '"+y', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<C-v>', '"+p', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', '<C-v>', '"+p', { noremap = true, silent = true })
+vim.keymap.set('v', '<C-v>', 'i<C-r><C-o>+<ESC>l=`[`]$', { desc = 'Paste block and indent'})
+vim.keymap.set('n', '<C-v>', 'i<C-r><C-o>+<ESC>l=`[`]$', { desc = 'Paste block and indent'})
 
 local augroup = vim.api.nvim_create_augroup("numbertoggle", {})
 
@@ -39,7 +39,6 @@ require("config.lazy")
 -- vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#51B3EC', bold=true })
 -- vim.api.nvim_set_hl(0, 'LineNr', { fg='#fffb7b', bold=true })
 -- vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#FB508F', bold=true })
-
 
 vim.cmd([[colorscheme catppuccin-mocha]])
 -- vim.cmd([[colorscheme tokyonight]])

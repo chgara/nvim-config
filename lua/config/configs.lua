@@ -2,6 +2,7 @@ return {
     lsp_servers = {
         "lua_ls",
         "clangd",
+        "csharp_ls",
         "bashls",
         "tsserver",
         "html",

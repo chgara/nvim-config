@@ -73,9 +73,10 @@ return {
     },
     {
         "folke/todo-comments.nvim",
-        event = {"BufReadPre", "BufNewFile"},
+        event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim" },
         opts = {}
     },
     { "folke/which-key.nvim", lazy = true },
+    { "lambdalisue/vim-suda", event = "VeryLazy" },
 }
