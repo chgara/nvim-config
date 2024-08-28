@@ -48,7 +48,7 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        event = "VeryLazy",
+        event = {"VeryLazy", "BufReadPre", "BufNewFile"},
         build = function()
             require("nvim-treesitter.install").update({ with_sync = true })()
         end,

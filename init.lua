@@ -5,6 +5,7 @@ vim.cmd([[set shiftwidth=4]])
 vim.cmd([[set softtabstop=4]])
 vim.cmd([[set clipboard=unnamedplus]])
 vim.cmd([[set number relativenumber]])
+vim.cmd([[set wrap!]])
 
 vim.api.nvim_set_keymap('n', '<C-c>', '"+y', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<C-c>', '"+y', { noremap = true, silent = true })
@@ -40,6 +41,17 @@ require("config.lazy")
 -- vim.api.nvim_set_hl(0, 'LineNr', { fg='#fffb7b', bold=true })
 -- vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#FB508F', bold=true })
 
-vim.cmd([[colorscheme catppuccin-mocha]])
+-- vim.cmd [[
+--   highlight Normal guibg=none
+--   highlight NonText guibg=none
+--   highlight Normal ctermbg=none
+--   highlight NonText ctermbg=none
+-- ]]
+
+-- vim.cmd[[colorscheme oceanic_material]]
+-- vim.cmd[[colorscheme pink-moon]]
+-- vim.cmd.colorscheme 'fluoromachine'
+vim.cmd[[colorscheme synthwave84]]
+-- vim.cmd([[colorscheme catppuccin-mocha]])
 -- vim.cmd([[colorscheme tokyonight]])
 -- vim.cmd([[colorscheme catppuccin-latte]])

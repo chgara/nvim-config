@@ -183,6 +183,7 @@ return {
     {
         "yetone/avante.nvim",
         event = {"BufReadPre", "BufNewFile"},
+        commit = "b661269b5b800af1ac72e8f4d8541a6a50cc7d62",
         build = "make",
         opts = {
             provider = "copilot",
@@ -191,7 +192,7 @@ return {
                 width = 25,
                 wrap = true,
                 sidebar_header = {
-                    align = "center",
+                    align = "left",
                     rounded = false,
                 },
             }
