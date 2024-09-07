@@ -12,7 +12,8 @@ return {
         "marksman",
         "pylyzer",
         "rust_analyzer",
-        "solidity_ls"
+        "solidity_ls",
+        "dockerls",
     },
     treesitter_langs = {
         "c",
@@ -35,6 +36,7 @@ return {
         "norg",
         "rust",
         "scss",
-        "solidity"
+        "solidity",
+        "dockerfile",
     },
 }

@@ -3,7 +3,7 @@ return {
         { "<A-Tab>", "<cmd>:bnext<cr>", desc = "Navigate to next buffer" },
     },
     nvim_tree = {
-        { "<c-b>", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Nvim Tree" },
+        { "<c-b>", "<cmd>NvimTreeFindFileToggle<cr>", desc = "Toggle Nvim Tree" },
     },
     telescope = {
         { "ff", "<cmd>Telescope find_files<cr>", desc = "Find files name" },

@@ -10,6 +10,7 @@ return {
         },
         config = function ()
             require("mason").setup()
+
             require("mason-lspconfig").setup({
                 ensure_installed = require("config.configs").lsp_servers
             })
@@ -29,7 +30,8 @@ return {
                     }
                 end,
                 ["csharp_ls"] = function ()
-                    require("lspconfig").tsserver.setup {
+                    -- REMEBER RESTORE FORLDERS
+                    require("lspconfig").csharp_ls.setup {
                         capabilities = capabilities,
                         on_attach = function(client, bufnr)
                             local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -37,7 +39,7 @@ return {
                             buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { noremap=true, silent=true })
                             buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap=true, silent=true })
                         end,
-                        settings = { rootMarkers = { "global.json", "Directory.Build.props", "*.sln", "*.csproj" } }
+                        -- settings = { rootMarkers = { "global.json", "Directory.Build.props", "*.sln", "*.csproj" } }
                     }
                 end
             }
@@ -51,6 +53,10 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "onsails/lspkind-nvim",
+            {
+                "dcampos/cmp-emmet-vim",
+                dependencies = {"mattn/emmet-vim"}
+            },
             {
                 "garymjr/nvim-snippets",
                 dependencies = { "rafamadriz/friendly-snippets" },
@@ -77,6 +83,9 @@ return {
                 return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
             end
 
+            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+            cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+
             require("cmp").setup({
 
                 snippet = {
@@ -86,6 +95,7 @@ return {
                 sources = cmp.config.sources({
                     { name = "copilot" },
                     { name = "nvim_lsp" },
+                    { name = 'emmet_vim' },
                     { name = "snippets" },
 		        }, {
 			        { name = "buffer" },
@@ -145,9 +155,6 @@ return {
                     return not disabled[cmd] or cmp.close()
                 end,
             })
-
-            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-            cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
         end,
     },
     {
@@ -160,12 +167,27 @@ return {
             end, { expr = true })
         end,
     },
-    -- {
-    --     -- TODO: Check
-    --     'windwp/nvim-ts-autotag',
-    --     event = "InsertEnter",
-    --     opts = {}
-    -- },
+    {
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        config = function ()
+            require("nvim-autopairs").setup({
+                check_ts = true,
+                ts_config = {},
+            })
+        end,
+    },
+    {
+        'windwp/nvim-ts-autotag',
+        event = "InsertEnter",
+        config = function ()
+            require('nvim-ts-autotag').setup()
+            vim.lsp.handlers["textDocument/publishDiagnostics"] =
+                vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+                    update_in_insert = true,
+                })
+        end,
+    },
     {
         'zbirenbaum/copilot.lua',
         event = {"BufReadPre", "BufNewFile"},
@@ -183,10 +205,10 @@ return {
     {
         "yetone/avante.nvim",
         event = {"BufReadPre", "BufNewFile"},
-        commit = "b661269b5b800af1ac72e8f4d8541a6a50cc7d62",
         build = "make",
         opts = {
-            provider = "copilot",
+            -- provider = "copilot",
+            provider = "claude",
             hints = { enabled = true },
             windows = {
                 width = 25,
@@ -212,11 +234,6 @@ return {
                 ft = { "markdown", "Avante" },
             },
         },
-    },
-    {
-        'windwp/nvim-autopairs',
-        event = "InsertEnter",
-        config = true,
     },
     {
         "folke/lazydev.nvim",
