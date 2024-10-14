@@ -53,5 +53,15 @@ return {
             silent = true,
             mode = { "i", "s" },
         }
+    },
+    conform = {
+        {
+            "<c-f>",
+            function()
+                require("conform").format({ async = true })
+            end,
+            mode = "",
+            desc = "Format buffer",
+        }
     }
 }
