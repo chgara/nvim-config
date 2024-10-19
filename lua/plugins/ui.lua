@@ -26,9 +26,9 @@ return {
 		"akinsho/toggleterm.nvim",
 		event = "VeryLazy",
 		version = "*",
+		keys = require("config.keymaps").toggleterm,
 		opts = {
 			size = 15,
-			open_mapping = [[<space>t]],
 		},
 	},
 	{

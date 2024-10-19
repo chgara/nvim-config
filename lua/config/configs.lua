@@ -48,11 +48,9 @@ return {
 		local clients = vim.lsp.get_clients({ bufnr = bufnr })
 		for _, client in ipairs(clients) do
 			if client.name == "denols" then
-				vim.notify("deno")
 				return { "deno_fmt" }
 			end
 		end
-		vim.notify("prettier")
 		return { "prettierd", "prettier", stop_after_first = true }
 	end,
 }
