@@ -6,14 +6,14 @@ return {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				-- cpp = { "clang-format" },
-				python = { "isort", "pyink" },
+				-- python = { "isort", "pyink" },
+				json = require("config.configs").get_deno_or_prettier,
+				html = require("config.configs").get_deno_or_prettier,
 				javascript = require("config.configs").get_deno_or_prettier,
 				typescript = require("config.configs").get_deno_or_prettier,
 				javascriptreact = require("config.configs").get_deno_or_prettier,
 				typescriptreact = require("config.configs").get_deno_or_prettier,
-				json = require("config.configs").get_deno_or_prettier,
-				html = require("config.configs").get_deno_or_prettier,
+				cpp = { "clang-format", lsp_format = "fallback", stop_after_first = true },
 			},
 			formatters = {
 				clang_format = { prepend_args = { "-style=webkit" } },
