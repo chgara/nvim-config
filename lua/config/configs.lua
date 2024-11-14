@@ -14,7 +14,6 @@ return {
 		-- "tailwindcss",
 		"spectral",
 		"marksman",
-		"pylyzer",
 		"rust_analyzer",
 		"solidity_ls",
 		"dockerls",

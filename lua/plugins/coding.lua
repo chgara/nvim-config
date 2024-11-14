@@ -266,8 +266,8 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		build = "make",
 		opts = {
-			provider = "copilot",
-			-- provider = "claude",
+			-- provider = "copilot",
+			provider = "claude",
 			hints = { enabled = true },
 			windows = {
 				width = 25,
