@@ -79,6 +79,19 @@ return {
 						on_attach = on_attach,
 					})
 				end,
+				["clangd"] = function()
+					require("lspconfig").clangd.setup({
+						on_attach = on_attach,
+						capabilities = capabilities,
+						-- compile commands can be under the build directory
+						root_dir = require("lspconfig").util.root_pattern(
+							"compile_commands.json",
+							"compile_commands.jsonc",
+							"build/compile_commands.json",
+							"build/compile_commands.jsonc"
+						),
+					})
+				end,
 				["denols"] = function()
 					require("lspconfig").denols.setup({
 						on_attach = on_attach,
