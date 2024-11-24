@@ -1,5 +1,13 @@
 return {
 	{
+		"vhyrro/luarocks.nvim",
+		priority = 1000,
+		config = true,
+		opts = {
+			rocks = { "magick" },
+		},
+	},
+	{
 		"nvim-telescope/telescope.nvim",
 		lazy = true,
 		tag = "0.1.8",

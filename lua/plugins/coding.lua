@@ -279,8 +279,11 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		build = "make",
 		opts = {
-			-- provider = "copilot",
-			provider = "claude",
+			provider = "copilot",
+			copilot = {
+				model = "claude-3.5-sonnet",
+			},
+			-- provider = "claude",
 			hints = { enabled = true },
 			windows = {
 				width = 25,
@@ -292,11 +295,29 @@ return {
 			},
 		},
 		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
 			"nvim-tree/nvim-web-devicons",
 			"zbirenbaum/copilot.lua",
 			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
+			{
+				-- support for image pasting
+				"HakonHarnes/img-clip.nvim",
+				event = "VeryLazy",
+				opts = {
+					-- recommended settings
+					default = {
+						embed_image_as_base64 = false,
+						prompt_for_file_name = false,
+						drag_and_drop = {
+							insert_mode = true,
+						},
+						-- required for Windows users
+						use_absolute_path = true,
+					},
+				},
+			},
 			{
 				"MeanderingProgrammer/render-markdown.nvim",
 				opts = {
@@ -304,6 +325,21 @@ return {
 					file_types = { "markdown", "Avante" },
 				},
 				ft = { "markdown", "Avante" },
+				dependencies = {
+					{
+						"3rd/image.nvim",
+						build = false,
+						opts = {
+							backend = "ueberzug",
+							integrations = {
+								markdown = {
+									filetypes = { "markdown", "vimwiki", "Avante" },
+								},
+							},
+						},
+						dependencies = { "luarocks.nvim" },
+					},
+				},
 			},
 		},
 	},

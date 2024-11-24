@@ -5,6 +5,7 @@ vim.cmd([[set shiftwidth=4]])
 vim.cmd([[set softtabstop=4]])
 vim.cmd([[set number relativenumber]])
 vim.cmd([[set wrap!]])
+vim.opt.laststatus = 3
 
 vim.api.nvim_set_keymap("n", "<C-c>", '"+y', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
