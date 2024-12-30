@@ -13,7 +13,11 @@ return {
 				typescript = require("config.configs").get_deno_or_prettier,
 				javascriptreact = require("config.configs").get_deno_or_prettier,
 				typescriptreact = require("config.configs").get_deno_or_prettier,
+				c = { "clang-format", lsp_format = "fallback", stop_after_first = true },
 				cpp = { "clang-format", lsp_format = "fallback", stop_after_first = true },
+				glsl = { "clang-format", lsp_format = "fallback", stop_after_first = true },
+				vert = { "clang-format", lsp_format = "fallback", stop_after_first = true },
+				frag = { "clang-format", lsp_format = "fallback", stop_after_first = true },
 			},
 			formatters = {
 				clang_format = { prepend_args = { "-style=webkit" } },
@@ -58,6 +62,7 @@ return {
 			require("mason").setup()
 
 			require("mason-lspconfig").setup({
+				automatic_installation = false,
 				ensure_installed = require("config.configs").lsp_servers,
 			})
 
@@ -262,6 +267,7 @@ return {
 	},
 	{
 		"zbirenbaum/copilot.lua",
+		enabled = false,
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("copilot").setup({

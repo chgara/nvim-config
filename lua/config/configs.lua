@@ -7,6 +7,7 @@ return {
 		"ts_ls",
 		"eslint",
 		"denols",
+		"glsl_analyzer",
 		-- TODO: fix
 		-- "html",
 		"cssls",
@@ -22,6 +23,7 @@ return {
 		"c",
 		"cpp",
 		"lua",
+		"glsl",
 		"luadoc",
 		"query",
 		"html",
