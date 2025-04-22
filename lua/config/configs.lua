@@ -8,6 +8,7 @@ return {
 		"eslint",
 		"denols",
 		"glsl_analyzer",
+		"pyright",
 		-- TODO: fix
 		-- "html",
 		"cssls",

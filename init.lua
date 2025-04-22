@@ -6,6 +6,7 @@ vim.cmd([[set softtabstop=4]])
 vim.cmd([[set number relativenumber]])
 vim.cmd([[set wrap!]])
 vim.opt.laststatus = 3
+vim.opt.background = "dark"
 
 vim.api.nvim_set_keymap("n", "<C-c>", '"+y', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
@@ -48,10 +49,16 @@ require("config.lazy")
 --   highlight NonText ctermbg=none
 -- ]]
 
--- vim.cmd[[colorscheme oceanic_material]]
--- vim.cmd[[colorscheme pink-moon]]
--- vim.cmd.colorscheme 'fluoromachine'
-vim.cmd([[colorscheme synthwave84]])
--- vim.cmd([[colorscheme catppuccin-mocha]])
--- vim.cmd([[colorscheme tokyonight]])
--- vim.cmd([[colorscheme catppuccin-latte]])
+-- Initialize theme system
+local themes = require("config.themes")
+themes.set_theme("catppuccin-mocha")
+
+-- Add keybinding to cycle themes
+vim.keymap.set("n", "<leader>tt", function()
+	require("config.themes").cycle_theme()
+end, { desc = "Cycle colorscheme" })
+
+-- Add keybinding to toggle transparency (works with pywal)
+vim.keymap.set("n", "<leader>tb", function()
+	require("config.themes").toggle_transparency()
+end, { desc = "Toggle background transparency" })

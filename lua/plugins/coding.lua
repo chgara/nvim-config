@@ -7,7 +7,7 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				-- python = { "isort", "pyink" },
-				json = require("config.configs").get_deno_or_prettier,
+				json = { "prettierd", "prettier", stop_after_first = true },
 				html = require("config.configs").get_deno_or_prettier,
 				javascript = require("config.configs").get_deno_or_prettier,
 				typescript = require("config.configs").get_deno_or_prettier,
@@ -267,7 +267,7 @@ return {
 	},
 	{
 		"zbirenbaum/copilot.lua",
-		enabled = false,
+		-- enabled = false,
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("copilot").setup({
@@ -276,6 +276,7 @@ return {
 					markdown = true,
 				},
 				panel = { enabled = false },
+				copilot_model = "gpt-4o-copilot",
 				suggestion = { enabled = false },
 			})
 		end,
@@ -286,11 +287,22 @@ return {
 		build = "make",
 		opts = {
 			provider = "copilot",
-			copilot = {
-				model = "claude-3.5-sonnet",
-			},
 			-- provider = "claude",
+			copilot = {
+				-- model = "claude-3.5-sonnet",
+				-- model = "claude-3.7-sonnet",
+				model = "gemini-2.5-pro",
+				-- model = "gpt-4.1",
+			},
 			hints = { enabled = true },
+			web_search_engine = {
+				provider = "tavily",
+			},
+
+			behaviour = {
+				auto_suggestions = false,
+			},
+
 			windows = {
 				width = 25,
 				wrap = true,
