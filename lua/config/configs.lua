@@ -24,6 +24,7 @@ return {
 		"c",
 		"cpp",
 		"lua",
+		"hlsl",
 		"glsl",
 		"luadoc",
 		"query",

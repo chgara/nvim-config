@@ -51,15 +51,25 @@ return {
 		end,
 	},
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
+		version = "^1.0.0",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"neovim/nvim-lspconfig",
-			"williamboman/mason-lspconfig.nvim",
+			{ "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
 		},
 		config = function()
 			require("mason").setup()
+
+			-- Configure diagnostic display
+			vim.diagnostic.config({
+				virtual_text = true, -- Show diagnostic messages as virtual text
+				signs = true, -- Show signs in the sign column
+				underline = true, -- Underline diagnostics
+				update_in_insert = true, -- Update diagnostics in insert mode
+				severity_sort = true, -- Sort diagnostics by severity
+			})
 
 			require("mason-lspconfig").setup({
 				automatic_installation = false,
@@ -285,14 +295,18 @@ return {
 		"yetone/avante.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		build = "make",
+		version = false, -- Never set this value to "*"! Never!
 		opts = {
 			provider = "copilot",
 			-- provider = "claude",
 			copilot = {
 				-- model = "claude-3.5-sonnet",
 				-- model = "claude-3.7-sonnet",
-				model = "gemini-2.5-pro",
-				-- model = "gpt-4.1",
+				-- model = "claude-3.7-sonnet-thought",
+				-- model = "gemini-2.5-pro",
+				model = "o4-mini",
+				-- model = "claude-4-sonnet-thought",
+				-- model = "claude-4-sonnet",
 			},
 			hints = { enabled = true },
 			web_search_engine = {
