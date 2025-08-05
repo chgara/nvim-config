@@ -51,7 +51,7 @@ require("config.lazy")
 
 -- Initialize theme system
 local themes = require("config.themes")
-themes.set_theme("catppuccin-mocha")
+themes.set_theme("github_dark_default")
 
 -- Add keybinding to cycle themes
 vim.keymap.set("n", "<leader>tt", function()

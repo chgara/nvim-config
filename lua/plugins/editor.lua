@@ -1,10 +1,15 @@
 return {
 	{
-		"vhyrro/luarocks.nvim",
-		priority = 1000,
-		config = true,
+		"sindrets/diffview.nvim",
+		event = "VeryLazy",
 		opts = {
-			rocks = { "magick" },
+			view = {
+				merge_tool = {
+					layout = "diff3_mixed",
+					disable_diagnostics = true, -- Temporarily disable diagnostics for diff buffers while in the view.
+					winbar_info = true,
+				},
+			},
 		},
 	},
 	{

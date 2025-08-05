@@ -1,13 +1,11 @@
 local M = {}
 
 M.themes = {
+	"cyberdream",
 	"synthwave84",
-	"catppuccin-mocha",
-	"catppuccin-latte",
-	"oceanic_material",
-	"pink-moon",
+	"github_dark_default",
+	"rose-pine",
 	"fluoromachine",
-	"tokyonight",
 }
 
 -- Track transparency state

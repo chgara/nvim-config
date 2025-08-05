@@ -1,27 +1,20 @@
 return {
-	-- {
-	-- 	"nyoom-engineering/oxocarbon.nvim",
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- },
 	{
-		"folke/tokyonight.nvim",
+		"scottmckendry/cyberdream.nvim",
+		lazy = false,
+		opts = {
+			transparent = true,
+		},
+		priority = 1000,
+	},
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
 		lazy = false,
 		priority = 1000,
 		opts = {
-			-- transparent = true,
-			-- styles = {
-			--   sidebars = "transparent",
-			--   floats = "transparent",
-			-- },
+			variant = "moon",
 		},
-	},
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		lazy = false,
-		priority = 1000,
-		opts = {},
 	},
 	{
 		"lunarvim/synthwave84.nvim",
@@ -44,10 +37,12 @@ return {
 		end,
 	},
 	{
-		"rafi/awesome-vim-colorschemes",
+		"projekt0n/github-nvim-theme",
+		name = "github-theme",
 		lazy = false,
 		priority = 1000,
-		config = function() end,
-		opts = {},
+		config = function()
+			require("github-theme").setup({})
+		end,
 	},
 }

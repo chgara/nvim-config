@@ -293,21 +293,23 @@ return {
 	},
 	{
 		"yetone/avante.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = "VeryLazy",
 		build = "make",
 		version = false, -- Never set this value to "*"! Never!
 		opts = {
-			provider = "copilot",
 			-- provider = "claude",
-			copilot = {
-				-- model = "claude-3.5-sonnet",
-				-- model = "claude-3.7-sonnet",
-				-- model = "claude-3.7-sonnet-thought",
-				model = "gemini-2.5-pro",
-				-- model = "o4-mini",
-				-- model = "o3-mini",
-				-- model = "claude-sonnet-4-thought",
-				-- model = "claude-sonnet-4",
+			provider = "copilot",
+			providers = {
+				copilot = {
+					-- model = "claude-3.5-sonnet",
+					-- model = "claude-3.7-sonnet",
+					-- model = "claude-3.7-sonnet-thought",
+					-- model = "gemini-2.5-pro",
+					-- model = "o4-mini",
+					-- model = "o3-mini",
+					-- model = "claude-sonnet-4-thought",
+					model = "claude-sonnet-4",
+				},
 			},
 			hints = { enabled = true },
 			web_search_engine = {
