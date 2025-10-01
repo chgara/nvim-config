@@ -308,7 +308,15 @@ return {
 					-- model = "o4-mini",
 					-- model = "o3-mini",
 					-- model = "claude-sonnet-4-thought",
-					model = "claude-sonnet-4",
+					-- model = "gpt-5",
+					-- model = "gpt-5-mini",
+					-- model = "gpt-4.1",
+					-- model = "gpt-5-codex",
+					-- model = "claude-sonnet-4",
+					model = "claude-sonnet-4.5",
+				},
+				morph = {
+					model = "morph-v3-large",
 				},
 			},
 			hints = { enabled = true },
@@ -318,6 +326,7 @@ return {
 
 			behaviour = {
 				auto_suggestions = false,
+				enable_fastapply = true,
 			},
 
 			windows = {
