@@ -12,7 +12,7 @@ return {
 		{ "fh", "<cmd>Telescope help_tags<cr>", desc = "Find help" },
 	},
 	toggleterm = {
-		{ "<space>t", "<cmd>ToggleTerm<cr>", mode = "v", desc = "Toggle terminal" },
+		{ "tt", "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
 	},
 	snippets = {
 		{

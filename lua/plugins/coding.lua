@@ -301,23 +301,17 @@ return {
 			provider = "copilot",
 			providers = {
 				copilot = {
-					-- model = "claude-3.5-sonnet",
-					-- model = "claude-3.7-sonnet",
-					-- model = "claude-3.7-sonnet-thought",
-					-- model = "gemini-2.5-pro",
-					-- model = "o4-mini",
-					-- model = "o3-mini",
-					-- model = "claude-sonnet-4-thought",
-					-- model = "gpt-5",
-					-- model = "gpt-5-mini",
 					-- model = "gpt-4.1",
 					-- model = "gpt-5-codex",
-					-- model = "claude-sonnet-4",
+					-- model = "gpt-5.1-codex-mini",
+					-- model = "gpt-5.1-codex",
+					-- model = "gemini-2.5-pro",
+					-- model = "gemini-3-pro-preview",
 					model = "claude-sonnet-4.5",
 				},
-				morph = {
-					model = "morph-v3-large",
-				},
+				-- morph = {
+				-- 	model = "morph-v3-large",
+				-- },
 			},
 			hints = { enabled = true },
 			web_search_engine = {
@@ -326,7 +320,7 @@ return {
 
 			behaviour = {
 				auto_suggestions = false,
-				enable_fastapply = true,
+				-- enable_fastapply = true,
 			},
 
 			windows = {
