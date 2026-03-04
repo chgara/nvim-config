@@ -79,50 +79,35 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             -- stylua: ignore start
-            local on_attach = function(client, bufnr)
-                local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-                buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { noremap=true, silent=true })
-                buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { noremap=true, silent=true })
-                buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap=true, silent=true })
-            end
+            vim.api.nvim_create_autocmd('LspAttach', {
+                callback = function(args)
+                    local bufnr = args.buf
+                    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+                    buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', { noremap=true, silent=true })
+                    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', { noremap=true, silent=true })
+                    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap=true, silent=true })
+                end,
+            })
 			-- stylua: ignore end
 
-			require("mason-lspconfig").setup_handlers({
-				function(server_name) -- default handler (optional)
-					require("lspconfig")[server_name].setup({
-						capabilities = capabilities,
-						on_attach = on_attach,
-					})
-				end,
-				["clangd"] = function()
-					require("lspconfig").clangd.setup({
-						on_attach = on_attach,
-						capabilities = capabilities,
-						-- compile commands can be under the build directory
-						root_dir = require("lspconfig").util.root_pattern(
-							"compile_commands.json",
-							"compile_commands.jsonc",
-							"build/compile_commands.json",
-							"build/compile_commands.jsonc"
-						),
-					})
-				end,
-				["denols"] = function()
-					require("lspconfig").denols.setup({
-						on_attach = on_attach,
-						capabilities = capabilities,
-						root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
-					})
-				end,
-				["ts_ls"] = function()
-					require("lspconfig").ts_ls.setup({
-						on_attach = on_attach,
-						capabilities = capabilities,
-						single_file_support = false,
-						root_dir = require("lspconfig").util.root_pattern("package.json"),
-					})
+			vim.lsp.config("*", {
+				capabilities = capabilities,
+			})
+
+			-- clangd: also look for compile_commands.json under build/
+			vim.lsp.config("clangd", {
+				root_dir = function(bufnr, on_dir)
+					local fname = vim.api.nvim_buf_get_name(bufnr)
+					on_dir(require("lspconfig.util").root_pattern(
+						"compile_commands.json",
+						"compile_commands.jsonc",
+						"build/compile_commands.json",
+						"build/compile_commands.jsonc"
+					)(fname))
 				end,
 			})
+
+			vim.lsp.enable(require("config.configs").lsp_servers)
 		end,
 	},
 	{
