@@ -67,4 +67,23 @@ return {
 			desc = "Format buffer",
 		},
 	},
+	opencode = {
+		{
+			"<leader>aa",
+			function()
+				require("opencode").toggle()
+			end,
+			mode = { "n", "t" },
+			desc = "Toggle opencode",
+		},
+		{
+			"<leader>ae",
+			function()
+				return require("opencode").operator("@this ")
+			end,
+			mode = { "n", "x" },
+			desc = "Add range to opencode",
+			expr = true,
+		},
+	},
 }

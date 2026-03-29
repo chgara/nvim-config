@@ -98,12 +98,14 @@ return {
 			vim.lsp.config("clangd", {
 				root_dir = function(bufnr, on_dir)
 					local fname = vim.api.nvim_buf_get_name(bufnr)
-					on_dir(require("lspconfig.util").root_pattern(
-						"compile_commands.json",
-						"compile_commands.jsonc",
-						"build/compile_commands.json",
-						"build/compile_commands.jsonc"
-					)(fname))
+					on_dir(
+						require("lspconfig.util").root_pattern(
+							"compile_commands.json",
+							"compile_commands.jsonc",
+							"build/compile_commands.json",
+							"build/compile_commands.jsonc"
+						)(fname)
+					)
 				end,
 			})
 
@@ -277,94 +279,59 @@ return {
 		end,
 	},
 	{
-		"yetone/avante.nvim",
-		event = "VeryLazy",
-		build = "make",
-		version = false, -- Never set this value to "*"! Never!
-		opts = {
-			-- provider = "claude",
-			provider = "copilot",
-			providers = {
-				copilot = {
-					-- model = "gpt-4.1",
-					-- model = "gpt-5-codex",
-					-- model = "gpt-5.1-codex-mini",
-					-- model = "gpt-5.1-codex",
-					-- model = "gemini-2.5-pro",
-					-- model = "gemini-3-pro-preview",
-					model = "claude-sonnet-4.5",
-				},
-				-- morph = {
-				-- 	model = "morph-v3-large",
-				-- },
-			},
-			hints = { enabled = true },
-			web_search_engine = {
-				provider = "tavily",
-			},
-
-			behaviour = {
-				auto_suggestions = false,
-				-- enable_fastapply = true,
-			},
-
-			windows = {
-				width = 25,
-				wrap = true,
-				sidebar_header = {
-					align = "left",
-					rounded = false,
-				},
-			},
-		},
+		"nickjvandyke/opencode.nvim",
+		version = "*", -- Latest stable release
+		keys = require("config.keymaps").opencode,
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-			"zbirenbaum/copilot.lua",
-			"stevearc/dressing.nvim",
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
 			{
-				-- support for image pasting
-				"HakonHarnes/img-clip.nvim",
-				event = "VeryLazy",
+				-- `snacks.nvim` integration is recommended, but optional
+				---@module "snacks" <- Loads `snacks.nvim` types for configuration intellisense
+				"folke/snacks.nvim",
+				optional = false,
 				opts = {
-					-- recommended settings
-					default = {
-						embed_image_as_base64 = false,
-						prompt_for_file_name = false,
-						drag_and_drop = {
-							insert_mode = true,
+					input = {}, -- Enhances `ask()`
+					picker = { -- Enhances `select()`
+						actions = {
+							opencode_send = function(...)
+								return require("opencode").snacks_picker_send(...)
+							end,
 						},
-						-- required for Windows users
-						use_absolute_path = true,
-					},
-				},
-			},
-			{
-				"MeanderingProgrammer/render-markdown.nvim",
-				opts = {
-					enabled = true,
-					file_types = { "markdown", "Avante" },
-				},
-				ft = { "markdown", "Avante" },
-				dependencies = {
-					{
-						"3rd/image.nvim",
-						build = false,
-						opts = {
-							backend = "ueberzug",
-							integrations = {
-								markdown = {
-									filetypes = { "markdown", "vimwiki", "Avante" },
+						win = {
+							input = {
+								keys = {
+									["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
 								},
 							},
 						},
-						dependencies = { "luarocks.nvim" },
 					},
 				},
 			},
 		},
+		config = function()
+			local function get_opencode_theme()
+				return vim.o.background == "light" and "gruvbox" or "tokyonight"
+			end
+
+			local opencode = require("opencode")
+			local original_toggle = opencode.toggle
+			opencode.toggle = function(...)
+				local provider = require("opencode.config").provider
+				if provider and provider.opts then
+					provider.opts.env = provider.opts.env or {}
+					provider.opts.env.OPENCODE_CONFIG_CONTENT = vim.json.encode({
+						theme = get_opencode_theme(),
+					})
+				end
+				return original_toggle(...)
+			end
+
+			---@type opencode.Opts
+			vim.g.opencode_opts = {
+				-- Your configuration, if any; goto definition on the type or field for details
+			}
+
+			vim.o.autoread = true -- Required for `opts.events.reload`
+		end,
 	},
 	{
 		"folke/lazydev.nvim",

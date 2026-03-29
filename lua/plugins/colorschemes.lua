@@ -1,5 +1,14 @@
 return {
 	{
+		"oncomouse/lushwal.nvim",
+		cmd = { "LushwalCompile" },
+		dependencies = {
+			{ "rktjmp/lush.nvim" },
+			{ "rktjmp/shipwright.nvim" },
+		},
+		lazy = false,
+	},
+	{
 		"scottmckendry/cyberdream.nvim",
 		lazy = false,
 		opts = {

@@ -1,6 +1,7 @@
 local M = {}
 
 M.themes = {
+	"lushwal",
 	"cyberdream",
 	"synthwave84",
 	"github_dark_default",
