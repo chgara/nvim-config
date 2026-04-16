@@ -266,6 +266,7 @@ return {
 		"zbirenbaum/copilot.lua",
 		-- enabled = false,
 		event = { "BufReadPre", "BufNewFile" },
+		dependencies = { "copilotlsp-nvim/copilot-lsp" },
 		config = function()
 			require("copilot").setup({
 				filetypes = {
@@ -273,7 +274,7 @@ return {
 					markdown = true,
 				},
 				panel = { enabled = false },
-				copilot_model = "gpt-4o-copilot",
+				copilot_model = "gpt-41-copilot",
 				suggestion = { enabled = false },
 			})
 		end,
