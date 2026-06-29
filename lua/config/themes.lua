@@ -1,6 +1,7 @@
 local M = {}
 
 M.themes = {
+	"neopywal",
 	"lushwal",
 	"cyberdream",
 	"synthwave84",

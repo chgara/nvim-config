@@ -1,10 +1,5 @@
 return {
 	{
-		"vhyrro/luarocks.nvim",
-		priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-		config = true,
-	},
-	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.nvim" }, -- if you use the mini.nvim suite
 		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
@@ -29,7 +24,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		lazy = true,
-		tag = "0.1.8",
+		branch = "master",
 		config = function()
 			require("telescope").setup({
 				extensions = {
@@ -75,19 +70,22 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = { "VeryLazy", "BufReadPre", "BufNewFile" },
-		build = function()
-			require("nvim-treesitter.install").update({ with_sync = true })()
-		end,
+		branch = "main",
+		-- Upstream requirement: v1.0 main branch does not support lazy-loading.
+		lazy = false,
+		build = ":TSUpdate",
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				sync_install = false,
-				indent = { enable = true },
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = false,
-				},
-				ensure_installed = require("config.configs").treesitter_langs,
+			local langs = require("config.configs").treesitter_langs
+			require("nvim-treesitter").install(langs)
+
+			vim.api.nvim_create_autocmd("FileType", {
+				group = vim.api.nvim_create_augroup("user_treesitter", { clear = true }),
+				callback = function(ev)
+					local ok = pcall(vim.treesitter.start, ev.buf)
+					if ok then
+						vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+					end
+				end,
 			})
 		end,
 		dependencies = {

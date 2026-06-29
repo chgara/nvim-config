@@ -51,7 +51,7 @@ require("config.lazy")
 
 -- Initialize theme system
 local themes = require("config.themes")
-themes.set_theme("rose-pine")
+themes.set_theme("neopywal")
 
 -- Add keybinding to cycle themes
 vim.keymap.set("n", "<leader>tt", function()

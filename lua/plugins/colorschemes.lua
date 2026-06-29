@@ -1,5 +1,24 @@
 return {
 	{
+		"RedsXDD/neopywal.nvim",
+		name = "neopywal",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			use_palette = "wallust",
+			transparent_background = true,
+			show_end_of_buffer = false,
+			terminal_colors = true,
+			styles = {
+				comments = { "italic" },
+				keywords = { "italic" },
+				functions = { "bold" },
+				variables = {},
+				booleans = { "bold" },
+			},
+		},
+	},
+	{
 		"scottmckendry/cyberdream.nvim",
 		lazy = false,
 		opts = {

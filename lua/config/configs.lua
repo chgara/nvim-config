@@ -2,7 +2,6 @@ return {
 	lsp_servers = {
 		"lua_ls",
 		"clangd",
-		"csharp_ls",
 		"bashls",
 		"ts_ls",
 		"eslint",
@@ -10,14 +9,14 @@ return {
 		"glsl_analyzer",
 		"pyright",
 		-- TODO: fix
-		-- "html",
+		"html",
 		"cssls",
 		-- TODO: fix
 		-- "tailwindcss",
-		"spectral",
+		-- spectral-language-server was removed from npm (2026), use spectral CLI instead
+		-- "spectral",
 		"marksman",
 		"rust_analyzer",
-		"solidity_ls",
 		"dockerls",
 	},
 	treesitter_langs = {
@@ -38,12 +37,10 @@ return {
 		"diff",
 		"json",
 		"markdown",
+		"markdown_inline",
 		"yaml",
-		"c_sharp",
 		"cuda",
-		"norg",
 		"rust",
-		"scss",
 		"solidity",
 		"dockerfile",
 	},
